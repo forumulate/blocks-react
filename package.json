@@ -1,0 +1,65 @@
+{
+  "name": "@forumulate/blocks-react",
+  "version": "0.1.1",
+  "description": "Render Forumulate content (rich text, CMS blocks, media) in React with the same markup the hosted reader serves. SSR-safe, no network requests, no runtime dependencies.",
+  "license": "MIT",
+  "author": "Forumulate",
+  "homepage": "https://forumulate.com/guides",
+  "bugs": {
+    "url": "https://forumulate.com/community"
+  },
+  "keywords": [
+    "forumulate",
+    "react",
+    "cms",
+    "headless",
+    "rich-text",
+    "blocks"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./icons": {
+      "types": "./dist/icons-lucide.d.ts",
+      "default": "./dist/icons-lucide.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "!dist/**/*.map",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.test.json",
+    "test": "vitest run",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "parse5": "^7.1.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/forumulate/blocks-react.git"
+  }
+}
