@@ -122,6 +122,19 @@ function providerFrame(url: URL, rawUrl: string): EmbedFrame | null {
     return frame('loom', `https://www.loom.com/embed/${seg(1)}`, PLAYER, 'Loom video', MEDIA_ALLOW);
   }
 
+  // Wistia (0473: course video hosts): an account page or the short link.
+  if ((host === 'wistia.com' || host.endsWith('.wistia.com') || host === 'wi.st') && parts[0] === 'medias' && seg(1)) {
+    return frame('wistia', `https://fast.wistia.net/embed/iframe/${seg(1)}`, PLAYER, 'Wistia video', MEDIA_ALLOW);
+  }
+  if (host === 'fast.wistia.net' && parts[0] === 'embed' && parts[1] === 'iframe' && seg(2)) {
+    return frame('wistia', `https://fast.wistia.net/embed/iframe/${seg(2)}`, PLAYER, 'Wistia video', MEDIA_ALLOW);
+  }
+
+  // Bunny Stream: the library's play or embed address.
+  if (host === 'iframe.mediadelivery.net' && (parts[0] === 'play' || parts[0] === 'embed') && /^\d+$/.test(parts[1] ?? '') && seg(2)) {
+    return frame('bunny', `https://iframe.mediadelivery.net/embed/${parts[1]}/${seg(2)}`, PLAYER, 'Bunny Stream video', MEDIA_ALLOW);
+  }
+
   // Figma (design + prototype)
   if (host === 'figma.com' && ['file', 'proto', 'design', 'board'].includes(parts[0] ?? '')) {
     return frame(
@@ -448,6 +461,8 @@ export const EMBED_FRAME_ORIGINS: readonly string[] = [
   'https://www.youtube.com',
   'https://player.vimeo.com',
   'https://www.loom.com',
+  'https://fast.wistia.net',
+  'https://iframe.mediadelivery.net',
   'https://codesandbox.io',
   'https://codepen.io',
   'https://www.figma.com',

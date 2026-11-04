@@ -3,6 +3,7 @@ import { h, hRaw, list, type HtmlAttrs } from '../h.js';
 import { iconSvg } from '../icons.js';
 import { href, src } from '../url.js';
 import { cssColorValue } from '../vendor/look-css.js';
+import { coverMediaKind } from '../vendor/cover-media.js';
 import { headingSlug } from '../vendor/heading-slug.js';
 import { responsiveFilled } from '../vendor/responsive-css.js';
 import type { RenderState } from '../state.js';
@@ -114,7 +115,14 @@ const card: BlockRenderer = (node, r) => {
   const title = h('div', { class: 'card-title' }, text(a.title), badge);
   const cta = a.cta ? h('div', { class: 'card-cta' }, `${text(a.cta)} →`) : null;
   const cover = a.coverUrl
-    ? h('img', { class: 'card-cover', src: src(a.coverUrl, proxy), ...imageBox(a.coverUrl, s), alt: '' })
+    ? h('img', {
+        class: 'card-cover',
+        src: src(a.coverUrl, proxy),
+        ...imageBox(a.coverUrl, s),
+        // What the cover is (vendor/cover-media), for a placeholder that fits it.
+        'data-media': coverMediaKind(a.kicker),
+        alt: '',
+      })
     : null;
   const desc = a.description ? h('div', { class: 'card-desc' }, text(a.description)) : null;
   const tint = a.color ? cssColorValue(a.color) : null;

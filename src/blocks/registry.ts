@@ -12,6 +12,8 @@ import { DOCS } from './docs.js';
 import { DOCS_EXTRA } from './docs-extra.js';
 import { PROMPT } from './prompt.js';
 import { UPDATES } from './updates.js';
+import { NEWSROOM } from './newsroom.js';
+import { API_REFERENCE } from './api-reference.js';
 import type { BlockRenderer } from './types.js';
 
 /**
@@ -34,4 +36,6 @@ export const RENDERERS: Readonly<Record<string, BlockRenderer>> = {
   ...DOCS_EXTRA,
   ...PROMPT,
   ...UPDATES,
+  ...NEWSROOM,
+  ...API_REFERENCE,
 };
